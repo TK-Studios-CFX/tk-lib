@@ -6,4 +6,4 @@ Config.inventory = "qb";
 
 module.exports = Config;
 
-// TK break server again
+// Nathan breaks the codebase twice a month on thursdays.
