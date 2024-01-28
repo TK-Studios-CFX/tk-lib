@@ -74,4 +74,13 @@ Maths.RandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/**
+ * Generates a boolean with a 50% chance of being true.
+ *
+ * @returns {boolean} A random boolean.
+ */
+Maths.RandomBool = () => {
+    return Math.random() < 0.5;
+}
+
 module.exports = { Maths };
