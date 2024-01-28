@@ -109,8 +109,55 @@ Lib.Functions.VersionChecker = VersionChecker;
  * @param {number} Y2 - The y-coordinate of the second point.
  * @returns {number} The distance between the two points.
  */
-const { Distance2D } = require("./server/Distance2D");
+const { Distance2D } = require("./server/Distance");
 Lib.Functions.Distance2D = Distance2D;
+
+/**
+ * Calculates the 3D distance between two points.
+ *
+ * @param {number} X1 - The X coordinate of the first point.
+ * @param {number} Y1 - The Y coordinate of the first point.
+ * @param {number} Z1 - The Z coordinate of the first point.
+ * @param {number} X2 - The X coordinate of the second point.
+ * @param {number} Y2 - The Y coordinate of the second point.
+ * @param {number} Z2 - The Z coordinate of the second point.
+ * @returns {number} The distance between the two points.
+ */
+const { Distance3D } = require("./server/Distance");
+Lib.Functions.Distance3D = Distance3D;
+
+/**
+ * Represents a 2D vector.
+ * 
+ * @param {number} X - The X coordinate of the vector.
+ * @param {number} Y - The Y coordinate of the vector.
+ * @returns {Object} - The 2D vector object.
+ */
+const { Vector2 } = require("./server/Distance");
+Lib.Functions.Vector2 = Vector2;
+
+/**
+ * Represents a 3D vector.
+ * 
+ * @param {number} X - The X coordinate of the vector.
+ * @param {number} Y - The Y coordinate of the vector.
+ * @param {number} Z - The Z coordinate of the vector.
+ * @returns {Object} - The 3D vector object.
+ */
+const { Vector3 } = require("./server/Distance");
+Lib.Functions.Vector3 = Vector3;
+
+/**
+ * Represents a 4-dimensional vector.
+ * 
+ * @param {number} X - The X component of the vector.
+ * @param {number} Y - The Y component of the vector.
+ * @param {number} Z - The Z component of the vector.
+ * @param {number} W - The W component of the vector.
+ * @returns {Object} - The 4-dimensional vector object.
+ */
+const { Vector4 } = require("./server/Distance");
+Lib.Functions.Vector4 = Vector4;
 
 /**
  * Retrieves the amount of money of a specific type for a player.
@@ -156,6 +203,12 @@ Lib.Functions.AddMoney = AddMoney;
  */
 const { RemoveMoney } = require("./server/Money");
 Lib.Functions.RemoveMoney = RemoveMoney;
+
+/**
+ * See the "Time" module for detailed documentation.
+ */
+const { Time } = require("./server/Time");
+Lib.Time = Time;
 
 function GetLib() {
 	return Lib;
