@@ -228,6 +228,12 @@ Lib.Functions.RemoveMoney = RemoveMoney;
 const { Time } = require("./server/Time");
 Lib.Time = Time;
 
+/**
+ * See the "Maths" module for detailed documentation.
+ */
+const { Maths } = require("./server/Maths");
+Lib.Maths = Maths;
+
 function GetLib() {
 	return Lib;
 }
@@ -235,13 +241,19 @@ function GetLib() {
 exports("GetLib", GetLib);
 
 if (Config.Debug) {
-	
+
+	let InternalLogger = Logger("TK-Lib", "Main");
+
 	for (const Method in Lib.Functions) {
-		Logger("TK-Lib", "Main").log(`Method Loaded: Lib.Functions.${Method}`);
+		InternalLogger.log(`Method Loaded: Lib.Functions.${Method}`);
 	}
 	
 	for (const Method in Lib.Time) {
-		Logger("TK-Lib", "Main").log(`Method Loaded: Lib.Time.${Method}`);
+		InternalLogger.log(`Method Loaded: Lib.Time.${Method}`);
+	}
+
+	for (const Method in Lib.Maths) {
+		InternalLogger.log(`Method Loaded: Lib.Maths.${Method}`);
 	}
 
 }
