@@ -16,8 +16,16 @@ async function GetVersionsData() {
     });
 }
 
+function LineBreakLogo() {
+    console.log(colors.green("=========================== [ TK STUDIOS ] ==========================="))
+}
+
 function LineBreak() {
-    console.log(colors.green("====================================================================="))
+    console.log(colors.green("======================================================================"))
+}
+
+function Highlight(Text) {
+    return colors.blue(Text);
 }
 
 async function CheckVersion(ResourceName, CurrentVersion) {
@@ -27,16 +35,16 @@ async function CheckVersion(ResourceName, CurrentVersion) {
     if (Updates.length == 0) return InternalLogger.alert(`Unable to fetch resource version info for ${ResourceName}`);
     let Update = Updates[Updates.length-1];
 	if (Update.version == CurrentVersion) {
-        LineBreak()
-        console.log(`You are currently running on the latest version of ${ResourceName} V ${CurrentVersion}`);
+        LineBreakLogo()
+        console.log(`You are currently running on the latest version of ${Highlight(ResourceName)} ${Highlight('V ' + CurrentVersion)}`);
         LineBreak()
         return
     }
-    LineBreak()
+    LineBreakLogo()
     if (Update.critical) {
-        console.log(`Critical Update Available for "${ResourceName}". Current: V ${CurrentVersion} Available: V ${Update.version}`);
+        console.log(`Critical Update Available for ${Highlight(ResourceName)}. Current: ${Highlight('V ' + CurrentVersion)} Available: ${Highlight('V ' + Update.version)}`);
     } else {
-        console.log(`Update Available for "${ResourceName}". Current: V ${CurrentVersion} Available: V ${Update.version}`);
+        console.log(`Update Available for ${Highlight(ResourceName)}. Current: ${Highlight('V ' + CurrentVersion)} Available: ${Highlight('V ' + Update.version)}`);
     }
     console.log(`Date Released: ${Update.date}`);
     console.log(`Changes:`);
@@ -47,7 +55,6 @@ async function CheckVersion(ResourceName, CurrentVersion) {
 }
 
 function VersionChecker(ResourceName, CurrentVersion) {
-	InternalLogger.alert(`Checking version of ${ResourceName} at ${CurrentVersion}`);
 	CheckVersion(ResourceName, CurrentVersion);
 }
 
