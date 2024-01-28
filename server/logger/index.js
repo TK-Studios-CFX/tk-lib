@@ -58,7 +58,6 @@ function Logger(resourceName, pageName) {
 	return new LoggerClass(resourceName, pageName);
 }
 
-
 RegisterNetEvent('tk-lib:server:log')
 onNet("tk-lib:server:log", (Type, Log) => {
 	let Resource = GetInvokingResource();
