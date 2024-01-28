@@ -2,6 +2,31 @@ const { Config } = require("../Config");
 const { InternalLogger } = require("../Logger");
 
 /**
+ * Retrieves the 3D vector of a player.
+ *
+ * @param {number} src - The source of the player.
+ * @returns {Vector3} - The player's position as a Vector3.
+ */
+function GetPlayerVector3(src) {
+    const ped = GetPlayerPed(src);
+    const [X, Y, Z] = GetEntityCoords(ped);
+    return Vector3(X, Y, Z);
+}
+
+/**
+ * Retrieves the position and heading of a player as a Vector4.
+ * 
+ * @param {number} src - The player source identifier.
+ * @returns {Vector4} The player's position and heading as a Vector4.
+ */
+function GetPlayerVector4(src) {
+    const ped = GetPlayerPed(src);
+    const [X, Y, Z] = GetEntityCoords(ped);
+    const Heading = GetEntityHeading(ped);
+    return Vector3(X, Y, Z, Heading);
+}
+
+/**
  * Calculates the Euclidean distance between two points in a 2D plane.
  *
  * @param {number} X1 - The x-coordinate of the first point.
@@ -83,6 +108,8 @@ function Vector4(X, Y, Z, W) {
 }
 
 module.exports = {
+    GetPlayerVector3,
+    GetPlayerVector4,
 	Distance2D,
     Distance3D,
     Vector2,
