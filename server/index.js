@@ -101,6 +101,24 @@ const { VersionChecker } = require("./server/VersionChecker");
 Lib.Functions.VersionChecker = VersionChecker;
 
 /**
+ * Retrieves the 3D vector of a player.
+ *
+ * @param {number} src - The source of the player.
+ * @returns {Vector3} - The player's position as a Vector3.
+ */
+const { GetPlayerVector3 } = require("./server/Distance");
+Lib.Functions.GetPlayerVector3 = GetPlayerVector3;
+
+/**
+ * Retrieves the position and heading of a player as a Vector4.
+ * 
+ * @param {number} src - The player source identifier.
+ * @returns {Vector4} The player's position and heading as a Vector4.
+ */
+const { GetPlayerVector4 } = require("./server/Distance");
+Lib.Functions.GetPlayerVector4 = GetPlayerVector4;
+
+/**
  * Calculates the Euclidean distance between two points in a 2D plane.
  * 
  * @param {number} X1 - The x-coordinate of the first point.
@@ -215,5 +233,17 @@ function GetLib() {
 }
 
 exports("GetLib", GetLib);
+
+if (Config.Debug) {
+	
+	for (const Method in Lib.Functions) {
+		Logger("TK-Lib", "Main").log(`Method Loaded: Lib.Functions.${Method}`);
+	}
+	
+	for (const Method in Lib.Time) {
+		Logger("TK-Lib", "Main").log(`Method Loaded: Lib.Time.${Method}`);
+	}
+
+}
 
 Logger("TK-Lib", "Main").log("Booted TK-Lib");

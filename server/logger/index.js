@@ -1,3 +1,4 @@
+const { Config } = require("../Config");
 const colors = require('colors');
 
 function getTag(tag, colour, type) {
@@ -41,6 +42,7 @@ class LoggerClass {
 		}
 
 		this.debug = (...content) => {
+			if (!Config.Debug) return;
 			content.forEach(snippet => {
 				console.log(`${getTag(this.resourceName, colors.bgMagenta, "DEBUG")} ${this.alias}`, snippet);
 			})
