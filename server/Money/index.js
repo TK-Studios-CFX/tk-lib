@@ -23,9 +23,10 @@ function GetMoney(src, type) {
  * @param {number} amount - The amount of money to set.
  * @returns {void}
  */
-function SetMoney(src, type, amount) {
-    InternalLogger.alert("FEATURE NOT IMPLEMENTED YET");
-	return;
+function SetMoney(src, type, amount, reason) {
+    let Player = QBCore.Functions.GetPlayer(src);
+    if (!Player) return false;
+    return Player.SetMoney(type.toLowerCase(), Math.floor(amount), reason)
 }
 
 /**
