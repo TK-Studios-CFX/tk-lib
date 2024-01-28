@@ -24,7 +24,7 @@ let EntityLockdownModes = [
 class RoutingBucket {
     constructor(ID, PopulationEnabled, EntityLockdownMode) {
         this.ID = ID;
-        this.PopulationEnabled = PopulationEnabled || true;
+        this.PopulationEnabled = PopulationEnabled || false;
         this.EntityLockdownMode = EntityLockdownMode || "inactive"
 
         this.Players = new Set();
@@ -66,12 +66,11 @@ function ClearPlayerRoutingBucket(src) {
 /**
  * Creates a routing bucket with the specified parameters.
  * 
- * @param {number} ID - The ID of the routing bucket.
  * @param {boolean} PopulationEnabled - Indicates whether population is enabled for the routing bucket.
  * @param {string} EntityLockdownMode - The entity lockdown mode for the routing bucket. ['strict', 'relaxed', 'inactive']
  * @returns {number} The ID of the created routing bucket.
  */
-function CreateRoutingBucket(ID, PopulationEnabled, EntityLockdownMode) {
+function CreateRoutingBucket(PopulationEnabled, EntityLockdownMode) {
     if (EntityLockdownMode && !EntityLockdownModes.includes(EntityLockdownMode)) return InternalLogger.error(`Invalid EntityLockdownMode '${EntityLockdownMode}'`)
     let ID = GetLowestUnusedRoutingBucket();
     RoutingBuckets.set(ID, new RoutingBucket(ID, PopulationEnabled, EntityLockdownMode))
