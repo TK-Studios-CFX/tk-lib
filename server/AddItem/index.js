@@ -1,15 +1,6 @@
-const Config = require('../config');
+const { Config } = require('../Config');
 
-function notify(src, type, message, length) {
-	console.log(message);
-	if (src == 0) return;
-	return TriggerClientEvent('QBCore:Notify', src, {
-		text: "TK Core",
-		caption: message
-	}, type, length || 5000)
-}
-
-function addItem(source, item, amount, slot, info) {
+function AddItem(source, item, amount, slot, info) {
 	TriggerEvent('tk-lib:server:log', 'info', `Giving ${amount} x ${item} to ${source}`);
 	if (!Config.inventory) return TriggerEvent('tk-lib:server:log', 'error', `No valid inventory configuration option.`)
 	if (Config.inventory == "qb") {
@@ -21,12 +12,9 @@ function addItem(source, item, amount, slot, info) {
 	return TriggerEvent('tk-lib:server:log', 'error', `${Config.inventory} is not a valid inventory configuration option.`)
 }
 
-RegisterNetEvent('tk-lib:server:addItem');
-onNet("tk-lib:server:addItem", (source, item, amount, slot, info) => {
-	return addItem(source, item, amount, slot, info)
+RegisterNetEvent('tk-lib:server:AddItem');
+onNet("tk-lib:server:AddItem", (source, item, amount, slot, info) => {
+	return AddItem(source, item, amount, slot, info)
 });
 
-module.exports = { 
-    notify,
-	addItem,
-};
+module.exports = { AddItem };

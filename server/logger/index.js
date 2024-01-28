@@ -1,10 +1,9 @@
 const colors = require('colors');
-const Config = require('../config');
 
 function getTag(tag, colour, type) {
 	return `[${colors.green(tag)}] [${colour(type)}]`
 }
-class Logger {
+class LoggerClass {
 	constructor(resourceName = "TK-Lib", pageName = "N/A") {
 		this.resourceName = resourceName.padEnd(12, " ");
 		this.pageName = pageName.padEnd(12, " ");
@@ -49,22 +48,15 @@ class Logger {
 	}
 }
 
-function createLogger(resourceName, pageName) {
-	return new Logger(resourceName, pageName);
+function Logger(resourceName, pageName) {
+	return new LoggerClass(resourceName, pageName);
 }
 
-// let Test = createLogger("TK-Test", "Main");
-// Test.log("This is a test log");
-// Test.warn("This is a test warn");
-// Test.error("This is a test error");
-// Test.alert("This is a test alert");
-// Test.debug("This is a test debug message");
-// Test.trace("This is a test trace");
 
 RegisterNetEvent('tk-lib:server:log')
 onNet("tk-lib:server:log", (Type, Log) => {
 	let Resource = GetInvokingResource();
-	let LocalLogger = createLogger(Resource, "Network");
+	let LocalLogger = Logger(Resource, "Network");
 	if (Type == "log") return LocalLogger.log(Log);
 	if (Type == "info") return LocalLogger.log(Log);
 	if (Type == "warn") return LocalLogger.warn(Log);
@@ -75,4 +67,6 @@ onNet("tk-lib:server:log", (Type, Log) => {
 	return LocalLogger.error(`Unsupported log type: ${Type}`)
 });
 
-module.exports = createLogger;
+const InternalLogger = Logger("TK-Lib", "Internal")
+
+module.exports = { Logger, InternalLogger };

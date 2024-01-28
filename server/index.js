@@ -1,26 +1,26 @@
-const logger = require('./server/logger');
-exports("logger", logger);
-logger("TK-Lib", "Main").log("Exported 'logger'");
+const lib = {};
 
-const {
-    notify,
-    addItem,
-} = require('./server/utils');
+lib.Functions = {};
 
-exports("notify", notify);
-logger("TK-Lib", "Main").log("Exported 'notify'");
+const { Logger } = require("./server/Logger");
+lib.Functions.Logger = Logger;
 
-exports("addItem", addItem);
-logger("TK-Lib", "Main").log("Exported 'addItem'");
+const { Notify } = require("./server/Notify");
+lib.Functions.Notify = Notify;
 
-// const {
-//     dbManager,
-//     test
-// } = require('./server/db');
-// exports("test", test);
-// logger("TK-Lib", "Main").log("Exported 'test'");
+const { AddItem } = require("./server/AddItem");
+lib.Functions.AddItem = AddItem;
 
-// exports("dbManager", dbManager)
-// logger("TK-Lib", "Main").log("Exported 'dbManager'");
+const { RemoveItem } = require("./server/RemoveItem");
+lib.Functions.RemoveItem = RemoveItem;
 
-logger("TK-Lib", "Main").log("Finished booting TK-Lib");
+const { Config } = require("./server/config");
+lib.Config = Config;
+
+function GetLib() {
+	return lib;
+}
+
+exports("GetLib", GetLib);
+
+Logger("TK-Lib", "Main").log("Booted TK-Lib");
