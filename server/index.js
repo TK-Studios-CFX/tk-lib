@@ -20,6 +20,12 @@ Lib.Functions.RemoveItem = RemoveItem;
 const { GetPlayersArray } = require("./server/GetPlayersArray");
 Lib.Functions.GetPlayersArray = GetPlayersArray; 
 
+const { GetPlayerIdentifier } = require("./server/GetPlayerIdentifier");
+Lib.Functions.GetPlayerIdentifier = GetPlayerIdentifier; 
+
+const { KickPlayer } = require("./server/KickPlayer");
+Lib.Functions.KickPlayer = KickPlayer; 
+
 const { VersionChecker } = require("./server/VersionChecker");
 Lib.Functions.VersionChecker = VersionChecker;
 
