@@ -234,6 +234,12 @@ Lib.Time = Time;
 const { Maths } = require("./server/Maths");
 Lib.Maths = Maths;
 
+/**
+ * See the "Buckets" module for detailed documentation.
+ */
+const { Buckets } = require("./server/Buckets");
+Lib.Buckets = Buckets;
+
 function GetLib() {
 	return Lib;
 }
@@ -254,6 +260,10 @@ if (Config.Debug) {
 
 	for (const Method in Lib.Maths) {
 		InternalLogger.log(`Method Loaded: Lib.Maths.${Method}`);
+	}
+
+	for (const Method in Lib.Buckets) {
+		InternalLogger.log(`Method Loaded: Lib.Buckets.${Method}`);
 	}
 
 }
