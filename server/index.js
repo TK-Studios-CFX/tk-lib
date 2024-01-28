@@ -28,27 +28,38 @@ const { Notify } = require("./server/Notify");
 Lib.Functions.Notify = Notify;
 
 /**
+ * Checks if a player has a certain item in a specified quantity.
+ * 
+ * @param {number} source - The source identifier of the player.
+ * @param {string} item - The item to check for.
+ * @param {number} quantity - The desired quantity of the item.
+ * @returns {boolean} - Returns true if the player has the item in the specified quantity, false otherwise.
+ */
+const { HasItem } = require("./server/Items");
+Lib.Functions.HasItem = HasItem;
+
+/**
  * Adds an item to the inventory of a player.
  * 
- * @param {number} source - The player's source ID.
+ * @param {string} source - The source of the player.
  * @param {string} item - The item to add.
  * @param {number} amount - The amount of the item to add.
- * @param {number} slot - The slot to add the item to.
+ * @param {number} slot - The slot where the item should be added.
  * @param {object} info - Additional information about the item.
- * @returns {boolean} - Returns true if the item was successfully added, false otherwise.
+ * @returns {any} - The result of adding the item to the inventory.
  */
-const { AddItem } = require("./server/AddItem");
+const { AddItem } = require("./server/Items");
 Lib.Functions.AddItem = AddItem;
 
 /**
  * Removes a specified quantity of an item from a player's inventory.
  * 
- * @param {number} source - The player's source ID.
- * @param {string} item - The name of the item to remove.
- * @param {number} quantity - The quantity of the item to remove.
+ * @param {number} source - The source identifier of the player.
+ * @param {string} item - The name of the item to be removed.
+ * @param {number} quantity - The quantity of the item to be removed.
  * @returns {boolean} - Returns true if the item was successfully removed, false otherwise.
  */
-const { RemoveItem } = require("./server/RemoveItem");
+const { RemoveItem } = require("./server/Items");
 Lib.Functions.RemoveItem = RemoveItem; 
 
 /**
