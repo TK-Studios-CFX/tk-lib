@@ -12,7 +12,10 @@ const { AddItem } = require("./server/AddItem");
 lib.Functions.AddItem = AddItem;
 
 const { RemoveItem } = require("./server/RemoveItem");
-lib.Functions.RemoveItem = RemoveItem;
+lib.Functions.RemoveItem = RemoveItem; 
+
+const { VersionChecker } = require("./server/VersionChecker");
+lib.Functions.VersionChecker = VersionChecker;
 
 const { Config } = require("./server/config");
 lib.Config = Config;

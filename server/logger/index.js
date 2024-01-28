@@ -27,6 +27,12 @@ class LoggerClass {
 				console.log(`${getTag(this.resourceName, colors.red, "ERROR")} ${this.alias}`, snippet);
 			})
 		}
+
+		this.success = (...content) => {
+			content.forEach(snippet => {
+				console.log(`${getTag(this.resourceName, colors.brightGreen, "SUCCESS")} ${this.alias}`, snippet);
+			})
+		}
 		
 		this.alert = (...content) => {
 			content.forEach(snippet => {
