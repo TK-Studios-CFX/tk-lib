@@ -32,22 +32,17 @@ async function CheckVersion(ResourceName, CurrentVersion) {
         LineBreak()
         return
     }
-
     LineBreak()
     if (Update.critical) {
         console.log(`Critical Update Available for "${ResourceName}". Current: V ${CurrentVersion} Available: V ${Update.version}`);
     } else {
         console.log(`Update Available for "${ResourceName}". Current: V ${CurrentVersion} Available: V ${Update.version}`);
     }
-
     console.log(`Date Released: ${Update.date}`);
-
-
     console.log(`Changes:`);
     Update.changes.forEach(Change => {
         console.log(`- ${Change}`);
     })
-	
     LineBreak()
 }
 

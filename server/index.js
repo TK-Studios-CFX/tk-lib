@@ -1,27 +1,27 @@
-const lib = {};
-
-lib.Functions = {};
-
-const { Logger } = require("./server/Logger");
-lib.Functions.Logger = Logger;
-
-const { Notify } = require("./server/Notify");
-lib.Functions.Notify = Notify;
-
-const { AddItem } = require("./server/AddItem");
-lib.Functions.AddItem = AddItem;
-
-const { RemoveItem } = require("./server/RemoveItem");
-lib.Functions.RemoveItem = RemoveItem; 
-
-const { VersionChecker } = require("./server/VersionChecker");
-lib.Functions.VersionChecker = VersionChecker;
+const Lib = {};
 
 const { Config } = require("./server/config");
-lib.Config = Config;
+Lib.Config = Config;
+
+Lib.Functions = {};
+
+const { Logger } = require("./server/Logger");
+Lib.Functions.Logger = Logger;
+
+const { Notify } = require("./server/Notify");
+Lib.Functions.Notify = Notify;
+
+const { AddItem } = require("./server/AddItem");
+Lib.Functions.AddItem = AddItem;
+
+const { RemoveItem } = require("./server/RemoveItem");
+Lib.Functions.RemoveItem = RemoveItem; 
+
+const { VersionChecker } = require("./server/VersionChecker");
+Lib.Functions.VersionChecker = VersionChecker;
 
 function GetLib() {
-	return lib;
+	return Lib;
 }
 
 exports("GetLib", GetLib);
