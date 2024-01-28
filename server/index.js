@@ -17,6 +17,9 @@ Lib.Functions.AddItem = AddItem;
 const { RemoveItem } = require("./server/RemoveItem");
 Lib.Functions.RemoveItem = RemoveItem; 
 
+const { GetPlayersArray } = require("./server/GetPlayersArray");
+Lib.Functions.GetPlayersArray = GetPlayersArray; 
+
 const { VersionChecker } = require("./server/VersionChecker");
 Lib.Functions.VersionChecker = VersionChecker;
 

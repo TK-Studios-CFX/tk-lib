@@ -1,5 +1,6 @@
 const Config = {};
 
-Config.inventory = "qb";
+Config.Framework = "qb-core"; // "qb-code", "standalone"
+Config.Inventory = "qb"; // "qb", "qs",
 
 module.exports = { Config };
