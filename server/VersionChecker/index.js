@@ -100,7 +100,7 @@ function EnsureResourceName(CurrentResourceName, CorrectResourceName) {
         console.log(colors.brightRed(`${HighlightCyan(CorrectResourceName)} is currently named ${HighlightCyan(CurrentResourceName)}.`))
         console.log(colors.brightRed(`Please ensure that the resource is named correctly to avoid issues!`));
         LineBreak()
-    }, 3000)
+    }, 3800)
 }
 
 VersionChecker(GetCurrentResourceName(), GetResourceVersion(GetCurrentResourceName()));

@@ -17,6 +17,7 @@ escrow_ignore {
 dependencies {
     "PolyZone",
     "yarn",
+    "oxmysql",
 }
 
 server_scripts {
