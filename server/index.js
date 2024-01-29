@@ -114,6 +114,26 @@ const { VersionChecker } = require("./server/VersionChecker");
 Lib.Functions.VersionChecker = VersionChecker;
 
 /**
+ * Retrieves the version of a resource.
+ * 
+ * @param {string} ResourceName - The name of the resource.
+ * @returns {string} The version of the resource. Returns "Unknown" if the version metadata is not found.
+ */
+const { GetResourceVersion } = require("./server/VersionChecker");
+Lib.Functions.GetResourceVersion = GetResourceVersion;
+
+/**
+ * Ensures that the resource name matches the correct resource name.
+ * If the current resource name does not match the correct resource name, a warning message is logged.
+ * 
+ * @param {string} CurrentResourceName - The current name of the resource.
+ * @param {string} CorrectResourceName - The correct name of the resource.
+ * @returns {void}
+ */
+const { EnsureResourceName } = require("./server/VersionChecker");
+Lib.Functions.EnsureResourceName = EnsureResourceName;
+
+/**
  * Retrieves the 2D vector of a player.
  *
  * @param {number} src - The source of the player.

@@ -2,18 +2,18 @@ const { Config } = require("../Config");
 const colors = require('colors');
 
 function getTag(tag, colour, type) {
-	return `[${colors.green(tag)}] [${colour(type)}]`
+	return `[${colors.cyan(tag)}] [${colour(type)}]`
 }
 class LoggerClass {
 	constructor(resourceName = "TK-Lib", pageName = "N/A") {
 		this.resourceName = resourceName.padEnd(12, " ");
 		this.pageName = pageName.padEnd(12, " ");
 
-		this.alias = `[${colors.green(this.pageName)}]`
+		this.alias = `[${colors.cyan(this.pageName)}]`
 
 		this.log = (...content) => {
 			content.forEach(snippet => {
-				console.log(`${getTag(this.resourceName, colors.green, "INFO")} ${this.alias}`, snippet);
+				console.log(`${getTag(this.resourceName, colors.cyan, "INFO")} ${this.alias}`, snippet);
 			})
 		}
 

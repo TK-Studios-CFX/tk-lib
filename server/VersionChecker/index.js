@@ -36,7 +36,6 @@ function FailedToFetchResource(ResourceName, CurrentVersion) {
     LineBreakLogo()
     console.log(colors.brightRed(`Unable to fetch resource version info for ${HighlightCyan(ResourceName)}`));
     console.log(colors.brightRed(`Current resource version: ${HighlightBlue('V ' + CurrentVersion)}`));
-    console.log(colors.brightRed(`Please ensure that the resource is named correctly to avoid issues!`));
     console.log(colors.brightRed(`Finished booting resource with warnings.`));
     LineBreak()
 }
@@ -72,11 +71,41 @@ async function CheckVersion(ResourceName, CurrentVersion) {
 function VersionChecker(ResourceName, CurrentVersion) {
     setTimeout(() => {
         CheckVersion(ResourceName, CurrentVersion);
-    }, 300)
+    }, 3000)
 }
 
-VersionChecker(GetCurrentResourceName(), Config.Version);
+/**
+ * Retrieves the version of a resource.
+ * 
+ * @param {string} ResourceName - The name of the resource.
+ * @returns {string} The version of the resource. Returns "Unknown" if the version metadata is not found.
+ */
+function GetResourceVersion(ResourceName) {
+    let Metadata = GetNumResourceMetadata(ResourceName, 'version')
+    if (Metadata != 1) return "Unknown";
+    return GetResourceMetadata(ResourceName, 'version', 0)
+}
+
+/**
+ * Ensures that the resource name matches the correct resource name.
+ * If the current resource name does not match the correct resource name, a warning message is logged.
+ * @param {string} CurrentResourceName - The current name of the resource.
+ * @param {string} CorrectResourceName - The correct name of the resource.
+ * @returns {void}
+ */
+function EnsureResourceName(CurrentResourceName, CorrectResourceName) {
+    if (CurrentResourceName == CorrectResourceName) return;
+    LineBreakLogo()
+    console.log(colors.brightRed(`${HighlightCyan(CorrectResourceName)} is currently named ${HighlightCyan(CurrentResourceName)}.`))
+    console.log(colors.brightRed(`Please ensure that the resource is named correctly to avoid issues!`));
+    LineBreak()
+}
+
+VersionChecker(GetCurrentResourceName(), GetResourceVersion(GetCurrentResourceName()));
+EnsureResourceName(GetCurrentResourceName(), 'tk-lib');
 
 module.exports = {
 	VersionChecker,
+    GetResourceVersion,
+    EnsureResourceName,
 };
