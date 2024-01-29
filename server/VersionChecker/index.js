@@ -95,10 +95,12 @@ function GetResourceVersion(ResourceName) {
  */
 function EnsureResourceName(CurrentResourceName, CorrectResourceName) {
     if (CurrentResourceName == CorrectResourceName) return;
-    LineBreakLogo()
-    console.log(colors.brightRed(`${HighlightCyan(CorrectResourceName)} is currently named ${HighlightCyan(CurrentResourceName)}.`))
-    console.log(colors.brightRed(`Please ensure that the resource is named correctly to avoid issues!`));
-    LineBreak()
+    setTimeout(() => {
+        LineBreakLogo()
+        console.log(colors.brightRed(`${HighlightCyan(CorrectResourceName)} is currently named ${HighlightCyan(CurrentResourceName)}.`))
+        console.log(colors.brightRed(`Please ensure that the resource is named correctly to avoid issues!`));
+        LineBreak()
+    }, 3000)
 }
 
 VersionChecker(GetCurrentResourceName(), GetResourceVersion(GetCurrentResourceName()));
