@@ -4,6 +4,7 @@ const colors = require('colors');
 function getTag(tag, colour, type) {
 	return `[${colors.cyan(tag)}] [${colour(type)}]`
 }
+
 class LoggerClass {
 	constructor(resourceName = "TK-Lib", pageName = "N/A") {
 		this.resourceName = resourceName.padEnd(12, " ");
@@ -44,7 +45,7 @@ class LoggerClass {
 		this.debug = (...content) => {
 			if (!Config.Debug) return;
 			content.forEach(snippet => {
-				console.log(`${getTag(this.resourceName, colors.bgMagenta, "DEBUG")} ${this.alias}`, snippet);
+				console.log(`${getTag(this.resourceName, colors.bgCyan, "DEBUG")} ${this.alias}`, snippet);
 			})
 		}
 
