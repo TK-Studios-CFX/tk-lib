@@ -52,6 +52,19 @@ const { AddItem } = require("./server/Items");
 Lib.Functions.AddItem = AddItem;
 
 /**
+ * Opens a stash for a player.
+ * 
+ * @param {string} src - The source of the player.
+ * @param {string} StashName - The name of the stash.
+ * @param {number} Slots - The number of slots in the stash.
+ * @param {number} Capacity - The maximum weight capacity of the stash.
+ * @returns {void}
+ */
+const { OpenStash } = require("./server/Items");
+Lib.Functions.OpenStash = OpenStash;
+
+
+/**
  * Removes a specified quantity of an item from a player's inventory.
  * 
  * @param {number} source - The source identifier of the player.
@@ -101,12 +114,21 @@ const { VersionChecker } = require("./server/VersionChecker");
 Lib.Functions.VersionChecker = VersionChecker;
 
 /**
+ * Retrieves the 2D vector of a player.
+ *
+ * @param {number} src - The source of the player.
+ * @returns {Vector2} - The player's position as a Vector2.
+ */
+const { GetPlayerVector2 } = require("./server/PlayerPosition");
+Lib.Functions.GetPlayerVector2 = GetPlayerVector2;
+
+/**
  * Retrieves the 3D vector of a player.
  *
  * @param {number} src - The source of the player.
  * @returns {Vector3} - The player's position as a Vector3.
  */
-const { GetPlayerVector3 } = require("./server/Distance");
+const { GetPlayerVector3 } = require("./server/PlayerPosition");
 Lib.Functions.GetPlayerVector3 = GetPlayerVector3;
 
 /**
@@ -115,67 +137,8 @@ Lib.Functions.GetPlayerVector3 = GetPlayerVector3;
  * @param {number} src - The player source identifier.
  * @returns {Vector4} The player's position and heading as a Vector4.
  */
-const { GetPlayerVector4 } = require("./server/Distance");
+const { GetPlayerVector4 } = require("./server/PlayerPosition");
 Lib.Functions.GetPlayerVector4 = GetPlayerVector4;
-
-/**
- * Calculates the Euclidean distance between two points in a 2D plane.
- * 
- * @param {number} X1 - The x-coordinate of the first point.
- * @param {number} Y1 - The y-coordinate of the first point.
- * @param {number} X2 - The x-coordinate of the second point.
- * @param {number} Y2 - The y-coordinate of the second point.
- * @returns {number} The distance between the two points.
- */
-const { Distance2D } = require("./server/Distance");
-Lib.Functions.Distance2D = Distance2D;
-
-/**
- * Calculates the 3D distance between two points.
- *
- * @param {number} X1 - The X coordinate of the first point.
- * @param {number} Y1 - The Y coordinate of the first point.
- * @param {number} Z1 - The Z coordinate of the first point.
- * @param {number} X2 - The X coordinate of the second point.
- * @param {number} Y2 - The Y coordinate of the second point.
- * @param {number} Z2 - The Z coordinate of the second point.
- * @returns {number} The distance between the two points.
- */
-const { Distance3D } = require("./server/Distance");
-Lib.Functions.Distance3D = Distance3D;
-
-/**
- * Represents a 2D vector.
- * 
- * @param {number} X - The X coordinate of the vector.
- * @param {number} Y - The Y coordinate of the vector.
- * @returns {Object} - The 2D vector object.
- */
-const { Vector2 } = require("./server/Distance");
-Lib.Functions.Vector2 = Vector2;
-
-/**
- * Represents a 3D vector.
- * 
- * @param {number} X - The X coordinate of the vector.
- * @param {number} Y - The Y coordinate of the vector.
- * @param {number} Z - The Z coordinate of the vector.
- * @returns {Object} - The 3D vector object.
- */
-const { Vector3 } = require("./server/Distance");
-Lib.Functions.Vector3 = Vector3;
-
-/**
- * Represents a 4-dimensional vector.
- * 
- * @param {number} X - The X component of the vector.
- * @param {number} Y - The Y component of the vector.
- * @param {number} Z - The Z component of the vector.
- * @param {number} W - The W component of the vector.
- * @returns {Object} - The 4-dimensional vector object.
- */
-const { Vector4 } = require("./server/Distance");
-Lib.Functions.Vector4 = Vector4;
 
 /**
  * Retrieves the amount of money of a specific type for a player.
@@ -240,6 +203,12 @@ Lib.Maths = Maths;
 const { Buckets } = require("./server/Buckets");
 Lib.Buckets = Buckets;
 
+/**
+ * See the "Strings" module for detailed documentation.
+ */
+const { StringMethods } = require("./server/StringMethods");
+Lib.StringMethods = StringMethods;
+
 function GetLib() {
 	return Lib;
 }
@@ -251,21 +220,21 @@ if (Config.Debug) {
 	let InternalLogger = Logger("TK-Lib", "Main");
 
 	for (const Method in Lib.Functions) {
-		InternalLogger.log(`Method Loaded: Lib.Functions.${Method}`);
+		InternalLogger.debug(`Method Loaded: Lib.Functions.${Method}`);
 	}
 	
 	for (const Method in Lib.Time) {
-		InternalLogger.log(`Method Loaded: Lib.Time.${Method}`);
+		InternalLogger.debug(`Method Loaded: Lib.Time.${Method}`);
 	}
 
 	for (const Method in Lib.Maths) {
-		InternalLogger.log(`Method Loaded: Lib.Maths.${Method}`);
+		InternalLogger.debug(`Method Loaded: Lib.Maths.${Method}`);
 	}
 
-	for (const Method in Lib.Buckets) {
-		InternalLogger.log(`Method Loaded: Lib.Buckets.${Method}`);
+	for (const Method in Lib.StringMethods) {
+		InternalLogger.debug(`Method Loaded: Lib.StringMethods.${Method}`);
 	}
 
 }
 
-Logger("TK-Lib", "Main").log("Booted TK-Lib");
+Logger("TK-Lib", "Main").debug("Booted TK-Lib");

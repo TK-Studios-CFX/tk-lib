@@ -1,5 +1,6 @@
 const { Config } = require('../Config');
 const { InternalLogger } = require('../Logger');
+const DB = require('../DB')
 const QBCore = global.exports["qb-core"].GetCoreObject();
 
 /**
@@ -53,8 +54,41 @@ function RemoveItem(source, item, quantity) {
 	return Player.Functions.RemoveItem(item, quantity);
 }
 
+/**
+ * Opens a stash for a player.
+ * 
+ * @param {string} src - The source of the player.
+ * @param {string} StashName - The name of the stash.
+ * @param {number} Slots - The number of slots in the stash.
+ * @param {number} Capacity - The maximum weight capacity of the stash.
+ * @returns {void}
+ */
+async function OpenStash(src, StashName, Slots, Capacity) {
+	if (!Config.Inventory) return InternalLogger.error(`No valid inventory configuration option.`)
+	if (Config.Inventory == "qb") {
+
+		InternalLogger.debug(StashName)
+
+		// await DB.run('INSERT IGNORE INTO stashitems (stash, items) VALUES (?, ?)', [
+		// 	StashName,
+		// 	JSON.stringify([])
+		// ])
+		return global.exports["qb-inventory"].OpenInventory("stash", StashName, {
+			maxweight: Capacity,
+			slots: Slots,
+		}, src)
+	}
+	if (Config.Inventory == "qs") {
+		return global.exports["qs-inventory"].RegisterStash(src, StashName, Slots, Capacity);
+	}
+	
+	return InternalLogger.error(`${Config.Inventory} is not a valid inventory configuration option.`)
+}
+
 module.exports = { 
 	HasItem,
 	AddItem,
 	RemoveItem,
+
+	OpenStash,
 };
