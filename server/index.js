@@ -1,6 +1,6 @@
 const Lib = {};
 
-const { Config } = require("./server/config");
+const { Config } = require("./server/Config");
 Lib.Config = Config;
 
 Lib.Functions = {};
