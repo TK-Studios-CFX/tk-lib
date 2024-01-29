@@ -35,7 +35,8 @@ function HighlightBlue(Text) {
 function FailedToFetchResource(ResourceName, CurrentVersion) {
     LineBreakLogo()
     console.log(colors.brightRed(`Unable to fetch resource version info for ${HighlightCyan(ResourceName)}`));
-    console.log(colors.brightRed(`Current resource version: ${HighlightBlue('V ' + CurrentVersion)}`))
+    console.log(colors.brightRed(`Current resource version: ${HighlightBlue('V ' + CurrentVersion)}`));
+    console.log(colors.brightRed(`Please ensure that the resource is named correctly to avoid issues!`));
     console.log(colors.brightRed(`Finished booting resource with warnings.`));
     LineBreak()
 }
