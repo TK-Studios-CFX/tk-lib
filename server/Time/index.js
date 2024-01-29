@@ -50,7 +50,7 @@ Time.Year = 1000 * 60 * 60 * 24 * 365;
  * @returns {number} The current epoch time in milliseconds.
  */
 Time.GetEpoch = () => {
-    return new Date.now();
+    return Date.now();
 }
 
 /**
