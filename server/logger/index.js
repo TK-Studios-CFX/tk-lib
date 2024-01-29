@@ -25,7 +25,7 @@ class LoggerClass {
 
 		this.error = (...content) => {
 			content.forEach(snippet => {
-				console.log(`${getTag(this.resourceName, colors.red, "ERROR")} ${this.alias}`, snippet);
+				console.log(`${getTag(this.resourceName, colors.brightRed, "ERROR")} ${this.alias}`, colors.brightRed(snippet));
 			})
 		}
 

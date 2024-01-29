@@ -191,15 +191,7 @@ Maths.Vector4 = (X, Y, Z, W) => {
 	};
 };
 
-/**
- * Formats a number as currency with the specified currency code.
- *
- * @param {number} Amount - The number to format as currency.
- * @param {string} CurrencyCode - The currency code to use for formatting (e.g., "USD", "EUR").
- * @returns {string} The formatted currency string.
- * @throws {Error} If the Amount parameter is not a number.
- * @throws {Error} If the CurrencyCode parameter is not a valid currency code.
- */
+
 Maths.FormatAsCurrency = (Amount = 0, CurrencyCode = "USD") => {
 	if (typeof Amount !== "number") return InternalLogger.error("Amount must be a number");
 	const validCurrencyCodes = [
