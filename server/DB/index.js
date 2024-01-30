@@ -71,9 +71,9 @@ async function all(Query, Params) {
 const DB = {};
 
 DB.Run = async (Query, Params) => {
-	var QueryStartTime = Date.now()
-	let Response = await run(Query, Params);d
-	var QueryEndTime = Date.now()
+	var QueryStartTime = Date.now();
+	let Response = await run(Query, Params);
+	var QueryEndTime = Date.now();
 	InternalLogger.database("Executing DB Run Query", Query, `Query took ${QueryEndTime - QueryStartTime} ms`)
 	return Response;
 }
