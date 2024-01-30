@@ -63,6 +63,25 @@ class LoggerClass {
 	}
 }
 
+class InternalLoggerClass extends LoggerClass {
+	constructor(resourceName = "TK-Lib", pageName = "N/A") {
+		super(resourceName, pageName);
+
+		this.database = (...content) => {
+			if (!Config.LogDatabaseQueries) return;
+			content.forEach(snippet => {
+				console.log(`${getTag(this.resourceName, colors.bgMagenta, "DATABASE")} ${this.alias}`, snippet);
+			})
+		}
+
+		this.databaseError = (...content) => {
+			content.forEach(snippet => {
+				console.log(`${getTag(this.resourceName, colors.bgRed, "DATABASE ERROR")} ${this.alias}`, snippet);
+			})
+		}
+	}
+}
+
 function Logger(resourceName, pageName) {
 	return new LoggerClass(resourceName, pageName);
 }
@@ -78,9 +97,9 @@ onNet("tk-lib:server:log", (Type, Log) => {
 	if (Type == "alert") return LocalLogger.alert(Log);
 	if (Type == "debug") return LocalLogger.debug(Log);
 	if (Type == "trace") return LocalLogger.trace(Log);
-	return LocalLogger.error(`Unsupported log type: ${Type}`)
+	return LocalLogger.error(`Unsupported log type: ${Type}`);
 });
 
-const InternalLogger = Logger("TK-Lib", "Internal")
+const InternalLogger = new InternalLoggerClass("tk-lib", "Internal")
 
 module.exports = { Logger, InternalLogger };

@@ -20,7 +20,7 @@ async function run(Query, Params) {
 		if (Params) return await oxmysql.query(Query, Params);
 		return await oxmysql.query(Query);
 	} catch (error) {
-		InternalLogger.error(error);
+		InternalLogger.databaseError(error);
 		return null;
 	}
 };
@@ -45,7 +45,7 @@ async function get(Query, Params) {
 			return null;
 		}
 	} catch (error) {
-		InternalLogger.error(error);
+		InternalLogger.databaseError(error);
 		return null;
 	}
 };
@@ -63,7 +63,7 @@ async function all(Query, Params) {
 		if (Params) return await oxmysql.query(Query, Params);
 		return await oxmysql.query(Query);
 	} catch (error) {
-		InternalLogger.error(error);
+		InternalLogger.databaseError(error);
 		return null;
 	}
 };
@@ -71,18 +71,27 @@ async function all(Query, Params) {
 const DB = {};
 
 DB.Run = async (Query, Params) => {
-	InternalLogger.debug("Executing DB Run Query", Query);
-	return await run(Query, Params);
+	var QueryStartTime = Date.now()
+	let Response = await run(Query, Params);d
+	var QueryEndTime = Date.now()
+	InternalLogger.database("Executing DB Run Query", Query, `Query took ${QueryEndTime - QueryStartTime} ms`)
+	return Response;
 }
 
 DB.Get = async (Query, Params) => {
-	InternalLogger.debug("Executing DB Get Query", Query);
-	return await get(Query, Params);
+	var QueryStartTime = Date.now()
+	let Response = await get(Query, Params);
+	var QueryEndTime = Date.now()
+	InternalLogger.database("Executing DB Get Query", Query, `Query took ${QueryEndTime - QueryStartTime} ms`)
+	return Response;
 }
 
 DB.All = async (Query, Params) => {
-	InternalLogger.debug("Executing DB All Query", Query);
-	return await all(Query, Params);
+	var QueryStartTime = Date.now()
+	let Response = await all(Query, Params);
+	var QueryEndTime = Date.now()
+	InternalLogger.database("Executing DB All Query", Query, `Query took ${QueryEndTime - QueryStartTime} ms`)
+	return Response;
 }
 
 module.exports = { DB };
