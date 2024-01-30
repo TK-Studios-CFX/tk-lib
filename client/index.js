@@ -26,8 +26,6 @@ exports("GetLib", GetLib);
 
 // Exports.Add("GetLib", GetLib);
 
-console.log("Exporting")
-
 // if (Config.Debug) {
 
 // 	let InternalLogger = Logger("TK-Lib", "Main");
