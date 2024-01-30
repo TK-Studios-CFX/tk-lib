@@ -206,6 +206,15 @@ const { RemoveMoney } = require("./server/Money");
 Lib.Functions.RemoveMoney = RemoveMoney;
 
 /**
+ * Waits for the specified amount of time.
+ * 
+ * @param {number} ms - The number of milliseconds to wait.
+ * @returns {Promise<boolean>} - A promise that resolves to true after the specified time has elapsed.
+ */
+const { Wait } = require("./server/Wait");
+Lib.Functions.Wait = Wait;
+
+/**
  * See the "Time" module for detailed documentation.
  */
 const { Time } = require("./server/Time");
@@ -228,6 +237,13 @@ Lib.Buckets = Buckets;
  */
 const { StringMethods } = require("./server/StringMethods");
 Lib.StringMethods = StringMethods;
+
+/**
+ * See the "DB" module for detailed documentation.
+ */
+const { DB } = require("./server/DB");
+Lib.DB = DB;
+
 
 function GetLib() {
 	return Lib;
@@ -253,6 +269,10 @@ if (Config.Debug) {
 
 	for (const Method in Lib.StringMethods) {
 		InternalLogger.debug(`Method Loaded: Lib.StringMethods.${Method}`);
+	}
+
+	for (const Method in Lib.DB) {
+		InternalLogger.debug(`Method Loaded: Lib.DB.${Method}`);
 	}
 
 }

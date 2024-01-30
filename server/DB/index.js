@@ -14,7 +14,7 @@ const { oxmysql } = require('@overextended/oxmysql');
  * @param {Array} [Params] - The parameters to be used in the query.
  * @returns {Promise<Array>} - The result of the query.
  */
-module.exports.run = async (Query, Params) => {
+async function run(Query, Params) {
 	try {
 		if (!Query) throw new Error('No Query Provided');
 		if (Params) return await oxmysql.query(Query, Params);
@@ -32,7 +32,7 @@ module.exports.run = async (Query, Params) => {
  * @param {Array} [Params] - The parameters to be used in the query.
  * @returns {Promise<Object|null>} - The first row of the query result, or null if no rows are found.
  */
-module.exports.get = async (Query, Params) => {
+async function get(Query, Params) {
 	try {
 		if (!Query) throw new Error('No Query Provided');
 		if (Params) {
@@ -57,7 +57,7 @@ module.exports.get = async (Query, Params) => {
  * @param {Array} [Params] - The parameters to be used in the query.
  * @returns {Promise<Array>} - The result of the query.
  */
-module.exports.all = async (Query, Params) => {
+async function all(Query, Params) {
 	try {
 		if (!Query) throw new Error('No Query Provided');
 		if (Params) return await oxmysql.query(Query, Params);
@@ -67,3 +67,22 @@ module.exports.all = async (Query, Params) => {
 		return null;
 	}
 };
+
+const DB = {};
+
+DB.Run = async (Query, Params) => {
+	InternalLogger.debug("Executing DB Run Query", Query);
+	return await run(Query, Params);
+}
+
+DB.Get = async (Query, Params) => {
+	InternalLogger.debug("Executing DB Get Query", Query);
+	return await get(Query, Params);
+}
+
+DB.All = async (Query, Params) => {
+	InternalLogger.debug("Executing DB All Query", Query);
+	return await all(Query, Params);
+}
+
+module.exports = { DB };

@@ -6,6 +6,12 @@ function getTag(tag, colour, type) {
 }
 
 class LoggerClass {
+	/**
+	 * Creates a new Logger instance.
+	 * 
+	 * @param {string} resourceName - The name of the resource.
+	 * @param {string} fileName - The name of the file.
+	 */
 	constructor(resourceName = "TK-Lib", pageName = "N/A") {
 		this.resourceName = resourceName.padEnd(12, " ");
 		this.pageName = pageName.padEnd(12, " ");
