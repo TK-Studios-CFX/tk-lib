@@ -4,6 +4,7 @@ const { InternalLogger } = require('../Logger');
 /**
  * Waits for the specified amount of time.
  * 
+ * @async
  * @param {number} ms - The number of milliseconds to wait.
  * @returns {Promise<boolean>} - A promise that resolves to true after the specified time has elapsed.
  */
