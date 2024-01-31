@@ -1,7 +1,7 @@
 author 'TK Studios'
 description 'TK Studios - Core Library.'
 url 'https://buy.tkstudios.store'
-version '1.0.3'
+version '1.0.4'
 
 fx_version 'cerulean'
 game {'gta5', 'rdr3'}
