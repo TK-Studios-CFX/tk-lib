@@ -84,16 +84,6 @@ const { GetPlayersArray } = require("./server/GetPlayersArray");
 Lib.Functions.GetPlayersArray = GetPlayersArray; 
 
 /**
- * Retrieves the player identifier based on the given source and type.
- * 
- * @param {number} src - The source of the player.
- * @param {string} type - The type of identifier to retrieve.
- * @returns {string} The player identifier, or null if not found.
- */
-const { GetPlayerIdentifier } = require("./server/GetPlayerIdentifier");
-Lib.Functions.GetPlayerIdentifier = GetPlayerIdentifier; 
-
-/**
  * Kicks a player from the server.
  * 
  * @param {string} src - The player's source identifier.
@@ -213,6 +203,36 @@ Lib.Functions.RemoveMoney = RemoveMoney;
  */
 const { Wait } = require("./server/Wait");
 Lib.Functions.Wait = Wait;
+
+
+/**
+ * Retrieves the identifiers associated with a player.
+ * 
+ * @param {string} src - The source of the player.
+ * @returns {string[]} - An array of player identifiers.
+ */
+const { GetPlayerIdentifiers } = require("./server/Identifiers");
+Lib.Functions.GetPlayerIdentifiers = GetPlayerIdentifiers;
+
+/**
+ * Retrieves the player identifier based on the given source and identifier type.
+ * 
+ * @param {string} src - The source of the player.
+ * @param {string} type - The type of identifier to retrieve.
+ * @returns {string|null} The player identifier, or null if not found.
+ */
+const { GetPlayerIdentifier } = require("./server/Identifiers");
+Lib.Functions.GetPlayerIdentifier = GetPlayerIdentifier;
+
+/**
+ * Retrieves the stripped player identifier based on the given identifier type.
+ * 
+ * @param {string} src - The source of the player.
+ * @param {string} type - The identifier type.
+ * @returns {string|null} The stripped player identifier, or null if not found.
+ */
+const { GetStrippedPlayerIdentifier } = require("./server/Identifiers");
+Lib.Functions.GetStrippedPlayerIdentifier = GetStrippedPlayerIdentifier;
 
 /**
  * See the "Time" module for detailed documentation.
