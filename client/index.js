@@ -18,34 +18,43 @@ Lib.Functions.Logger = global.exports['tk-lib'].GetLib_Logger();
 
 Lib.Maths = global.exports['tk-lib'].GetLib_Maths();
 
+Lib.Props = global.exports['tk-lib'].GetLib_Props();
+
+RegisterCommand("TestProps", async () => {
+	let [x, y, z] = GetEntityCoords(PlayerPedId());
+	let [_a, _b, w] = GetEntityRotation(PlayerPedId());
+
+	// let Coords = {
+	// 	x: -1776.11, 
+	// 	y: -2774.2, 
+	// 	z: 13.94, 
+	// 	w: 109.97
+	// }
+
+	let Coords = {
+		x: x,
+		y: y,
+		z: z,
+		w: w,
+	}
+
+	await Lib.Props.CreateProp('TestObject', 'nuk3_prop_server_empty', Coords, {
+		FreezeObject: true,
+		PlaceObjectOnGround: true,
+		FreezeObject: true,
+		MissionEntity: true,
+	});
+
+	for (let i = 0; i <= 11; i++) {
+		await Lib.Props.UpdatePropModel('TestObject', `nuk3_prop_server_${i}`);
+		await Lib.Functions.Wait(200);
+	}
+	
+	await Lib.Props.DeleteProp('TestObject')
+})
+
 function GetLib() {
 	return Lib;
 }
 
 exports("GetLib", GetLib);
-
-// Exports.Add("GetLib", GetLib);
-
-// if (Config.Debug) {
-
-// 	let InternalLogger = Logger("TK-Lib", "Main");
-
-// 	for (const Method in Lib.Functions) {
-// 		InternalLogger.debug(`Method Loaded: Lib.Functions.${Method}`);
-// 	}
-	
-// 	for (const Method in Lib.Time) {
-// 		InternalLogger.debug(`Method Loaded: Lib.Time.${Method}`);
-// 	}
-
-// 	for (const Method in Lib.Maths) {
-// 		InternalLogger.debug(`Method Loaded: Lib.Maths.${Method}`);
-// 	}
-
-// 	for (const Method in Lib.StringMethods) {
-// 		InternalLogger.debug(`Method Loaded: Lib.StringMethods.${Method}`);
-// 	}
-
-// }
-
-// Logger("TK-Lib", "Main").debug("Booted TK-Lib");

@@ -53,6 +53,19 @@ function RemoveItem(source, item, quantity) {
 	return Player.Functions.RemoveItem(item, quantity);
 }
 
+
+async function GetInventoryItems(src) {
+	InternalLogger.debug(`Fetching inventory items for ${src}`);
+	let Player = QBCore.Functions.GetPlayer(src);
+	if (!Player) return null;
+	
+	// console.log(Player.Inventory)
+	
+	Player.Inventory.ForEach(Item => {
+		Logger.debug(Item)
+	})
+}
+
 /**
  * Opens a stash for a player.
  * 
