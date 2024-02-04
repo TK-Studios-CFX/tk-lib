@@ -1,6 +1,5 @@
 const { Config } = require('../Config');
 const { InternalLogger } = require('../Logger');
-const DB = require('../DB')
 const QBCore = global.exports["qb-core"].GetCoreObject();
 
 /**
@@ -54,6 +53,19 @@ function RemoveItem(source, item, quantity) {
 	return Player.Functions.RemoveItem(item, quantity);
 }
 
+
+async function GetInventoryItems(src) {
+	InternalLogger.debug(`Fetching inventory items for ${src}`);
+	let Player = QBCore.Functions.GetPlayer(src);
+	if (!Player) return null;
+	
+	// console.log(Player.Inventory)
+	
+	Player.Inventory.ForEach(Item => {
+		Logger.debug(Item)
+	})
+}
+
 /**
  * Opens a stash for a player.
  * 
@@ -66,13 +78,6 @@ function RemoveItem(source, item, quantity) {
 async function OpenStash(src, StashName, Slots, Capacity) {
 	if (!Config.Inventory) return InternalLogger.error(`No valid inventory configuration option.`)
 	if (Config.Inventory == "qb") {
-
-		InternalLogger.debug(StashName)
-
-		// await DB.run('INSERT IGNORE INTO stashitems (stash, items) VALUES (?, ?)', [
-		// 	StashName,
-		// 	JSON.stringify([])
-		// ])
 		return global.exports["qb-inventory"].OpenInventory("stash", StashName, {
 			maxweight: Capacity,
 			slots: Slots,

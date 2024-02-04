@@ -84,16 +84,6 @@ const { GetPlayersArray } = require("./server/GetPlayersArray");
 Lib.Functions.GetPlayersArray = GetPlayersArray; 
 
 /**
- * Retrieves the player identifier based on the given source and type.
- * 
- * @param {number} src - The source of the player.
- * @param {string} type - The type of identifier to retrieve.
- * @returns {string} The player identifier, or null if not found.
- */
-const { GetPlayerIdentifier } = require("./server/GetPlayerIdentifier");
-Lib.Functions.GetPlayerIdentifier = GetPlayerIdentifier; 
-
-/**
  * Kicks a player from the server.
  * 
  * @param {string} src - The player's source identifier.
@@ -206,6 +196,45 @@ const { RemoveMoney } = require("./server/Money");
 Lib.Functions.RemoveMoney = RemoveMoney;
 
 /**
+ * Waits for the specified amount of time.
+ * 
+ * @param {number} ms - The number of milliseconds to wait.
+ * @returns {Promise<boolean>} - A promise that resolves to true after the specified time has elapsed.
+ */
+const { Wait } = require("./server/Wait");
+Lib.Functions.Wait = Wait;
+
+
+/**
+ * Retrieves the identifiers associated with a player.
+ * 
+ * @param {string} src - The source of the player.
+ * @returns {string[]} - An array of player identifiers.
+ */
+const { GetPlayerIdentifiers } = require("./server/Identifiers");
+Lib.Functions.GetPlayerIdentifiers = GetPlayerIdentifiers;
+
+/**
+ * Retrieves the player identifier based on the given source and identifier type.
+ * 
+ * @param {string} src - The source of the player.
+ * @param {string} type - The type of identifier to retrieve.
+ * @returns {string|null} The player identifier, or null if not found.
+ */
+const { GetPlayerIdentifier } = require("./server/Identifiers");
+Lib.Functions.GetPlayerIdentifier = GetPlayerIdentifier;
+
+/**
+ * Retrieves the stripped player identifier based on the given identifier type.
+ * 
+ * @param {string} src - The source of the player.
+ * @param {string} type - The identifier type.
+ * @returns {string|null} The stripped player identifier, or null if not found.
+ */
+const { GetStrippedPlayerIdentifier } = require("./server/Identifiers");
+Lib.Functions.GetStrippedPlayerIdentifier = GetStrippedPlayerIdentifier;
+
+/**
  * See the "Time" module for detailed documentation.
  */
 const { Time } = require("./server/Time");
@@ -228,6 +257,13 @@ Lib.Buckets = Buckets;
  */
 const { StringMethods } = require("./server/StringMethods");
 Lib.StringMethods = StringMethods;
+
+/**
+ * See the "DB" module for detailed documentation.
+ */
+const { DB } = require("./server/DB");
+Lib.DB = DB;
+
 
 function GetLib() {
 	return Lib;
@@ -253,6 +289,10 @@ if (Config.Debug) {
 
 	for (const Method in Lib.StringMethods) {
 		InternalLogger.debug(`Method Loaded: Lib.StringMethods.${Method}`);
+	}
+
+	for (const Method in Lib.DB) {
+		InternalLogger.debug(`Method Loaded: Lib.DB.${Method}`);
 	}
 
 }

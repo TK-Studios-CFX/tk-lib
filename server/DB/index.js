@@ -14,13 +14,13 @@ const { oxmysql } = require('@overextended/oxmysql');
  * @param {Array} [Params] - The parameters to be used in the query.
  * @returns {Promise<Array>} - The result of the query.
  */
-module.exports.run = async (Query, Params) => {
+async function run(Query, Params) {
 	try {
 		if (!Query) throw new Error('No Query Provided');
 		if (Params) return await oxmysql.query(Query, Params);
 		return await oxmysql.query(Query);
 	} catch (error) {
-		InternalLogger.error(error);
+		InternalLogger.databaseError(error);
 		return null;
 	}
 };
@@ -32,7 +32,7 @@ module.exports.run = async (Query, Params) => {
  * @param {Array} [Params] - The parameters to be used in the query.
  * @returns {Promise<Object|null>} - The first row of the query result, or null if no rows are found.
  */
-module.exports.get = async (Query, Params) => {
+async function get(Query, Params) {
 	try {
 		if (!Query) throw new Error('No Query Provided');
 		if (Params) {
@@ -45,7 +45,7 @@ module.exports.get = async (Query, Params) => {
 			return null;
 		}
 	} catch (error) {
-		InternalLogger.error(error);
+		InternalLogger.databaseError(error);
 		return null;
 	}
 };
@@ -57,13 +57,41 @@ module.exports.get = async (Query, Params) => {
  * @param {Array} [Params] - The parameters to be used in the query.
  * @returns {Promise<Array>} - The result of the query.
  */
-module.exports.all = async (Query, Params) => {
+async function all(Query, Params) {
 	try {
 		if (!Query) throw new Error('No Query Provided');
 		if (Params) return await oxmysql.query(Query, Params);
 		return await oxmysql.query(Query);
 	} catch (error) {
-		InternalLogger.error(error);
+		InternalLogger.databaseError(error);
 		return null;
 	}
 };
+
+const DB = {};
+
+DB.Run = async (Query, Params) => {
+	var QueryStartTime = Date.now();
+	let Response = await run(Query, Params);
+	var QueryEndTime = Date.now();
+	InternalLogger.database("Executing DB Run Query", Query, `Query took ${QueryEndTime - QueryStartTime} ms`)
+	return Response;
+}
+
+DB.Get = async (Query, Params) => {
+	var QueryStartTime = Date.now()
+	let Response = await get(Query, Params);
+	var QueryEndTime = Date.now()
+	InternalLogger.database("Executing DB Get Query", Query, `Query took ${QueryEndTime - QueryStartTime} ms`)
+	return Response;
+}
+
+DB.All = async (Query, Params) => {
+	var QueryStartTime = Date.now()
+	let Response = await all(Query, Params);
+	var QueryEndTime = Date.now()
+	InternalLogger.database("Executing DB All Query", Query, `Query took ${QueryEndTime - QueryStartTime} ms`)
+	return Response;
+}
+
+module.exports = { DB };

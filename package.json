@@ -1,4 +1,18 @@
 {
+
+  "name": "tk-lib",
+  "description": "Core library for TK Studios Resources",
+  "version": "1.0.3",
+  "main": "server/index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tk-lib"
+  ],
+  "author": "TK Studios",
+  "license": "ISC",
   "dependencies": {
     "@overextended/oxmysql": "^1.3.0",
     "colors": "^1.4.0",

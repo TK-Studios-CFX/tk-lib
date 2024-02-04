@@ -4,7 +4,14 @@ const colors = require('colors');
 function getTag(tag, colour, type) {
 	return `[${colors.cyan(tag)}] [${colour(type)}]`
 }
+
 class LoggerClass {
+	/**
+	 * Creates a new Logger instance.
+	 * 
+	 * @param {string} resourceName - The name of the resource.
+	 * @param {string} fileName - The name of the file.
+	 */
 	constructor(resourceName = "TK-Lib", pageName = "N/A") {
 		this.resourceName = resourceName.padEnd(12, " ");
 		this.pageName = pageName.padEnd(12, " ");
@@ -44,13 +51,32 @@ class LoggerClass {
 		this.debug = (...content) => {
 			if (!Config.Debug) return;
 			content.forEach(snippet => {
-				console.log(`${getTag(this.resourceName, colors.bgMagenta, "DEBUG")} ${this.alias}`, snippet);
+				console.log(`${getTag(this.resourceName, colors.bgCyan, "DEBUG")} ${this.alias}`, snippet);
 			})
 		}
 
 		this.trace = (...content) => {
 			content.forEach(snippet => {
 				console.trace(`${getTag(this.resourceName, colors.red, "DEBUG")} ${this.alias}`, snippet);
+			})
+		}
+	}
+}
+
+class InternalLoggerClass extends LoggerClass {
+	constructor(resourceName = "TK-Lib", pageName = "N/A") {
+		super(resourceName, pageName);
+
+		this.database = (...content) => {
+			if (!Config.LogDatabaseQueries) return;
+			content.forEach(snippet => {
+				console.log(`${getTag(this.resourceName, colors.bgMagenta, "DATABASE")} ${this.alias}`, snippet);
+			})
+		}
+
+		this.databaseError = (...content) => {
+			content.forEach(snippet => {
+				console.log(`${getTag(this.resourceName, colors.bgRed, "DATABASE ERROR")} ${this.alias}`, snippet);
 			})
 		}
 	}
@@ -71,9 +97,9 @@ onNet("tk-lib:server:log", (Type, Log) => {
 	if (Type == "alert") return LocalLogger.alert(Log);
 	if (Type == "debug") return LocalLogger.debug(Log);
 	if (Type == "trace") return LocalLogger.trace(Log);
-	return LocalLogger.error(`Unsupported log type: ${Type}`)
+	return LocalLogger.error(`Unsupported log type: ${Type}`);
 });
 
-const InternalLogger = Logger("TK-Lib", "Internal")
+const InternalLogger = new InternalLoggerClass("tk-lib", "Internal")
 
 module.exports = { Logger, InternalLogger };
