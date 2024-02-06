@@ -46,13 +46,12 @@ function AddItem(source, item, amount, slot, info) {
  * @param {number} quantity - The quantity of the item to be removed.
  * @returns {boolean} - Returns true if the item was successfully removed, false otherwise.
  */
-function RemoveItem(source, item, quantity) {
+function RemoveItem(source, item, quantity, slot, metadata) {
 	let Player = QBCore.Functions.GetPlayer(source);
 	if (!Player) return false
 	InternalLogger.log(`Removing ${quantity} x ${item} from ${source}`);
-	return Player.Functions.RemoveItem(item, quantity);
+	return Player.Functions.RemoveItem(item, quantity, slot, metadata);
 }
-
 
 async function GetInventoryItems(src) {
 	InternalLogger.debug(`Fetching inventory items for ${src}`);
