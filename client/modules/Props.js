@@ -37,6 +37,16 @@ Props.DeleteProp = async (ModelReference) => {
     return true;
 }
 
+async function LoadModel(ModelHash) {
+	if (!HasModelLoaded(ModelHash)) {
+		RequestModel(ModelHash);
+		while (!HasModelLoaded(ModelHash)) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+	}
+    return true;
+}
+
 Props.CreateProp = async (ModelReference, ModelName, Coords, Options) => {
     const CoordSet = new CoordinateSet(Coords);
 	const ModelHash = GetHashKey(ModelName);
@@ -49,12 +59,7 @@ Props.CreateProp = async (ModelReference, ModelName, Coords, Options) => {
 
     // TODO: Add in timeout here
 
-	if (!HasModelLoaded(ModelHash)) {
-		RequestModel(ModelHash);
-		while (!HasModelLoaded(ModelHash)) {
-			await new Promise((resolve) => setTimeout(resolve, 10));
-		}
-	}
+    await LoadModel(ModelHash);
 
     // Removing Old Objects
 

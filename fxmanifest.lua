@@ -1,7 +1,7 @@
 author 'TK Studios'
 description 'TK Studios - Core Library.'
 url 'https://buy.tkstudios.store'
-version '1.0.4'
+version '1.0.5'
 
 fx_version 'cerulean'
 game {'gta5', 'rdr3'}
@@ -25,6 +25,7 @@ server_scripts {
 }
 
 client_scripts {
+    'client/*.lua',
     'client/modules/*.js',
     'client/index.js',
 }

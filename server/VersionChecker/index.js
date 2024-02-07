@@ -71,7 +71,7 @@ async function CheckVersion(ResourceName, CurrentVersion) {
 function VersionChecker(ResourceName, CurrentVersion) {
     setTimeout(() => {
         CheckVersion(ResourceName, CurrentVersion);
-    }, 3000)
+    }, 10000)
 }
 
 /**
@@ -100,7 +100,7 @@ function EnsureResourceName(CurrentResourceName, CorrectResourceName) {
         console.log(colors.brightRed(`${HighlightCyan(CorrectResourceName)} is currently named ${HighlightCyan(CurrentResourceName)}.`))
         console.log(colors.brightRed(`Please ensure that the resource is named correctly to avoid issues!`));
         LineBreak()
-    }, 3800)
+    }, 12000)
 }
 
 VersionChecker(GetCurrentResourceName(), GetResourceVersion(GetCurrentResourceName()));

@@ -1,3 +1,5 @@
+let QBCore = global.exports["qb-core"].GetCoreObject();
+
 const Lib = {};
 
 Lib.Config = {
@@ -14,44 +16,68 @@ Lib.Functions.Wait = async (ms) => {
 	});
 }
 
+Lib.Functions.ProgressBar = async (Label, Duration, Options) => {
+	return new Promise((resolve, reject) => {
+		QBCore.Functions.Progressbar(
+			"tk_lib_progressbar",
+			Label, // Text
+			Duration, // Duration
+			Options.UseWhileDead || false, // Use While Dead
+			true, // Can Cancel
+			{
+				disableMovement: true,
+				disableCarMovement: true,
+				disableMouse: false,
+				disableCombat: true,
+			},
+			{
+				animDict: Options.animDict,
+				anim: Options.anim,
+				flags: 49,
+			},
+			{},
+			{},
+			function () {
+				return resolve(true);
+			},
+			function () {
+				return resolve(false);
+			}
+		);
+	});
+}
+
 Lib.Functions.Logger = global.exports['tk-lib'].GetLib_Logger();
 
 Lib.Maths = global.exports['tk-lib'].GetLib_Maths();
 
 Lib.Props = global.exports['tk-lib'].GetLib_Props();
 
-RegisterCommand("TestProps", async () => {
-	let [x, y, z] = GetEntityCoords(PlayerPedId());
-	let [_a, _b, w] = GetEntityRotation(PlayerPedId());
+Lib.Functions.ObjectPlacementUI = global.exports['tk-lib'].ObjectPlacementUI;
 
-	// let Coords = {
-	// 	x: -1776.11, 
-	// 	y: -2774.2, 
-	// 	z: 13.94, 
-	// 	w: 109.97
-	// }
+// RegisterCommand("TestProps", async () => {
+// 	console.log("Going")
+// 	let [x, y, z] = GetEntityCoords(PlayerPedId());
+// 	let [_a, _b, w] = GetEntityRotation(PlayerPedId());
 
-	let Coords = {
-		x: x,
-		y: y,
-		z: z,
-		w: w,
-	}
+// 	let Coords = await Lib.Functions.ObjectPlacementUI("nuk3_prop_server_empty");
 
-	await Lib.Props.CreateProp('TestObject', 'nuk3_prop_server_empty', Coords, {
-		FreezeObject: true,
-		PlaceObjectOnGround: true,
-		FreezeObject: true,
-		MissionEntity: true,
-	});
+// 	if (!Coords) return console.error("NO COORDS");
 
-	for (let i = 0; i <= 11; i++) {
-		await Lib.Props.UpdatePropModel('TestObject', `nuk3_prop_server_${i}`);
-		await Lib.Functions.Wait(200);
-	}
+// 	await Lib.Props.CreateProp('TestObject', 'nuk3_prop_server_empty', Coords, {
+// 		FreezeObject: true,
+// 		PlaceObjectOnGround: true,
+// 		FreezeObject: true,
+// 		MissionEntity: true,
+// 	});
+
+// 	for (let i = 0; i <= 11; i++) {
+// 		await Lib.Props.UpdatePropModel('TestObject', `nuk3_prop_server_${i}`);
+// 		await Lib.Functions.Wait(200);
+// 	}
 	
-	await Lib.Props.DeleteProp('TestObject')
-})
+// 	await Lib.Props.DeleteProp('TestObject')
+// })
 
 function GetLib() {
 	return Lib;
