@@ -79,6 +79,20 @@ Lib.Functions.ObjectPlacementUI = global.exports['tk-lib'].ObjectPlacementUI;
 // 	await Lib.Props.DeleteProp('TestObject')
 // })
 
+RegisterCommand("ViewProp", async (source, args, rawcommand) => {
+	if (!args[0]) return;
+	let Coords = await Lib.Functions.ObjectPlacementUI(args[0]);
+	await Lib.Props.DeleteProp('TestObject2');
+	if (!Coords) return;
+	await Lib.Props.CreateProp('TestObject2', args[0], Coords, {
+		FreezeObject: true,
+		PlaceObjectOnGround: true,
+		FreezeObject: true,
+		MissionEntity: true,
+		IsNetworkProp: true,
+	});
+})
+
 function GetLib() {
 	return Lib;
 }

@@ -41,8 +41,8 @@ local function setupScaleform(scaleform)
 
     PushScaleformMovieFunction(scaleform, "SET_DATA_SLOT")
     PushScaleformMovieFunctionParameterInt(2)
-    Button(GetControlInstructionalButton(2, 34, true))
-    Button(GetControlInstructionalButton(2, 35, true))
+    Button(GetControlInstructionalButton(2, 190, true))
+    Button(GetControlInstructionalButton(2, 189, true))
     ButtonMessage("Rotate object")
     PopScaleformMovieFunctionVoid()
 
@@ -107,9 +107,13 @@ local function ObjectPlacementUI(object)
     CurrentObject = CreateObject(object, 1.0, 1.0, 1.0, false, true, false)
     local heading = 0.0
     SetEntityHeading(CurrentObject, 0)
-    SetEntityAlpha(CurrentObject, 150)
+    -- SetEntityAlpha(CurrentObject, 200)
     SetEntityCollision(CurrentObject, false, false)
     FreezeEntityPosition(CurrentObject, true)
+
+    SetEntityDrawOutline(CurrentObject, true);
+    SetEntityDrawOutlineColor(52, 134, 235, 255);
+    SetEntityDrawOutlineShader(0);
 
     local IsPlacementValid = false
 
@@ -127,13 +131,13 @@ local function ObjectPlacementUI(object)
             IsPlacementValid = false
         end
         
-        if IsControlPressed(0, 34) then
-            heading = heading + 5
+        if IsControlPressed(0, 174) then
+            heading = heading + 2
             if heading > 360 then heading = 0.0 end
         end
 
-        if IsControlPressed(0, 35) then
-            heading = heading - 5
+        if IsControlPressed(0, 175) then
+            heading = heading - 2
             if heading < 0 then heading = 360.0 end
         end
 

@@ -86,7 +86,7 @@ Props.CreateProp = async (ModelReference, ModelName, Coords, Options) => {
 
     // Object Creation
 
-	const ObjectHandle = CreateObject(ModelHash, CoordSet.x, CoordSet.y, CoordSet.z, false, true, false);
+	const ObjectHandle = CreateObject(ModelHash, CoordSet.x, CoordSet.y, CoordSet.z, Options.IsNetworkProp || false, true, false);
     PropStorage.set(ModelReference, new Prop(ObjectHandle, ModelReference, ModelName, CoordSet, Options));
 
     // Object Attributes + Options
