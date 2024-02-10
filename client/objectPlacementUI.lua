@@ -113,7 +113,7 @@ local function ObjectPlacementUI(object)
 
     SetEntityDrawOutline(CurrentObject, true);
     SetEntityDrawOutlineColor(52, 134, 235, 255);
-    SetEntityDrawOutlineShader(0);
+    SetEntityDrawOutlineShader(1);
 
     local IsPlacementValid = false
 
